@@ -24,11 +24,15 @@ class LoadAdmin(admin.ModelAdmin):
         'from_city',
         'to_city',
         'client_price',
+        'client_paid_amount',
+        'client_remaining_balance',
         'driver_price',
         'total_paid',
         'remaining_balance',
         'profit',
         'colored_status',
+        'broker',
+        'broker_fee',
     )
 
     list_filter = ('status',)

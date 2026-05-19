@@ -35,6 +35,12 @@ class Load(models.Model):
         decimal_places=2
     )
 
+    client_paid_amount = models.DecimalField(
+    max_digits=20,
+    decimal_places=2,
+    default=0
+)
+
     client_currency = models.ForeignKey(
         Currency,
         on_delete=models.CASCADE,
@@ -136,10 +142,14 @@ class Load(models.Model):
     def remaining_balance(self):
         return self.driver_price - self.total_paid
 
-    @property
+        @property
+    def client_remaining_balance(self):
+        return self.client_price - self.client_paid_amount
+
+        @property
     def profit(self):
         return (
-            self.client_price
+            self.client_paid_amount
             - self.driver_price
             - self.broker_fee
             - self.dispatcher_fee
